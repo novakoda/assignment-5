@@ -1,19 +1,17 @@
 # James Williams
-from Employee import *
+from customer import *
 
 def create_employee():
     print("-+-+-+-+-\n\nCreating a new employee.....\n")
-    name = input("Enter a name for the employee: ")
-    designation = input("Is %s a director, manager, or staff?: " % name.title())
-    salary = float(input("Enter the salary for %s: " % name.title()))
-    try: 
-        e = Employee()
-        e.set_name(name)
-        e.set_designation(designation)
-        e.set_salary(salary)
-        print("%s" % e.info())
-        return e
-    except InvalidValueError as e:
-        print("$%.2f/year is too low for a good employee!"%e.salary)
+    first = input("First name: ")
+    last = input("Last name: ")
+    emp = Employee(first, last)
+    try:
+        salary = float(input("Enter the salary for %s: " % emp.get_name().title()))
+        emp.set_emp_salary(salary)
+        print("%s makes $%.2f/year salary with a $%.2f bonus" % (emp.get_name().title(), emp.get_emp_salary(), emp.calculate_bonus()))
+        return emp
+    except InvalidValueError as err:
+        print("$%.2f/year is too low for a good employee!"%err.salary)
 
 create_employee()
